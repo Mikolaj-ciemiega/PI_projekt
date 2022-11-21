@@ -7,6 +7,8 @@ using namespace std;
 
 int main()
 {
+
+	//test!!!!
 	setlocale(LC_ALL, "");
 
 	char tekst[65] = {"\0"};
