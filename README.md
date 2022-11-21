@@ -1,1 +1,3 @@
-# we have no idea what we are doing 
+Salsa20 - kod nie został jeszcze złamany
+Wersja 1 - stabilna, automatycznie szyfruje i deszyfruje tekst
+Wersja 2 - niestabilna, pozwala wybrać czy syfrować czy deszyfrować tekst
