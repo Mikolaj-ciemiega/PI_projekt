@@ -1,5 +1,4 @@
-﻿
-#include <iostream>
+﻿#include <iostream>
 #include <cstdio>
 #include <cmath>
 #include <cstring>
@@ -24,11 +23,11 @@ void rowround(char* y)
         quarterround(y + i + 40, y + i + 44, y + i + 32, y + i + 36);
         quarterround(y + i + 60, y + i + 48, y + i + 52, y + i + 56);
     }
-/*
-    quarterround(&y[0], &y[1], &y[2], &y[3]);
-    quarterround(&y[5], &y[6], &y[7], &y[4]);
-    quarterround(&y[10], &y[11], &y[8], &y[9]);
-    quarterround(&y[15], &y[12], &y[13], &y[14]);*/
+    /*
+        quarterround(&y[0], &y[1], &y[2], &y[3]);
+        quarterround(&y[5], &y[6], &y[7], &y[4]);
+        quarterround(&y[10], &y[11], &y[8], &y[9]);
+        quarterround(&y[15], &y[12], &y[13], &y[14]);*/
 }
 
 void columnround(char* x)
@@ -40,11 +39,11 @@ void columnround(char* x)
         quarterround(x + i + 40, x + i + 56, x + i + 8, x + i + 24);
         quarterround(x + i + 60, x + i + 12, x + i + 28, x + i + 44);
     }
-/*
-    quarterround(&x[0], &x[4], &x[8], &x[12]);
-    quarterround(&x[5], &x[9], &x[13], &x[1]);
-    quarterround(&x[10], &x[14], &x[2], &x[6]);
-    quarterround(&x[15], &x[3], &x[7], &x[11]);*/
+    /*
+        quarterround(&x[0], &x[4], &x[8], &x[12]);
+        quarterround(&x[5], &x[9], &x[13], &x[1]);
+        quarterround(&x[10], &x[14], &x[2], &x[6]);
+        quarterround(&x[15], &x[3], &x[7], &x[11]);*/
 }
 
 void doubleround(char* x)
@@ -53,7 +52,7 @@ void doubleround(char* x)
     rowround(x);
 }
 
-char littleendian_first(char input, int i)
+char littleendian(char input, int i)
 {
     return (input << (i * 8));
 }
@@ -77,12 +76,20 @@ void hash_salsa(char* wsk_tabK, char* wsk_output)
     {
         for (int j = 0; j < 4; j++)
         {
-            words[i][j] = littleendian_first(coppy_words[i][j], j);
+            words[i][j] = littleendian(coppy_words[i][j], j);
         }
     }
     char* wsk_words = &words[0][0];
 
     doubleround(wsk_words);
+
+    for (int i = 0; i < 16; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            words[i][j] = littleendian((words[i][j] + coppy_words[i][j]) % (int)pow(2, 32), j);
+        }
+    }
 
     for (int i = 0; i < 16; i++)
     {
