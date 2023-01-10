@@ -1,3 +1,3 @@
-# Salsa20 - Kod nie został jeszcze złamany
+# Aplikacja szyfrująca wykorzystująca kod Salsa20 - dotąd nie złamany
 
-### Główne źródło: https://www.crypto-it.net/eng/symmetric/salsa20.html
+### Główne źródło infromacji o metodzie: https://www.crypto-it.net/eng/symmetric/salsa20.html
